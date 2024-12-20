@@ -1,8 +1,4 @@
-const closemodal = document.querySelector(".sr-only");
-const modal_joueur = document.querySelector(".modal-add");
+const button_delete = document.querySelector(".button_delete");
+console.log(button_delete);
 
-
-console.log(modal_joueur);
-closemodal.addEventListener("click",function(){
-    modal_joueur.computedStyleMap.display = "none";
-})
+console.log("hello");

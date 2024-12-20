@@ -6,13 +6,6 @@
     include('create.php');
 ?>
 
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +15,7 @@
     <link rel="stylesheet" href="css/dashboard.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Itim&family=Jaro:opsz@6..72&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -133,6 +127,7 @@
                 <input type="submit" name="send"  class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" placeholder ="submit">
             </form>
 
+
         </div>
     </div>
 </div> 
@@ -188,52 +183,100 @@
                 <th scope="col" class="px-6 py-3">
                 positioning/physical
                 </th>
+                <th scope="col" class="px-6 py-3">
+                Actions
+                </th>
 
 
             </tr>
         </thead>
         <tbody>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <?php   include("affichage.php"); 
+        
+            while($row = mysqli_fetch_assoc($result))
+            {
+                $player = $row["id"];
+                $name = $row['nameplayer'];
+                $photoplayer = $row['Photoplayer'];
+                $position_player = $row['positionplayer'];
+                $nom_nationalite = $row['COUNTRYNAME'];
+                $flag_nationalite = $row['flag'];
+                $club_name = $row['club_name'];
+                $club_logo = $row['logo'];
+                $Rating = $row['Rating'];
+                $pace = $row['pace'];
+                $shooting = $row['shooting'];
+                $passing = $row['passing'];
+                $defending = $row['defending'];
+                $dribbling = $row['dribbling'];
+                $physical = $row['physical'];
+
+
+
+                echo '
+                <tbody>
+            <tr class = "bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                <img src="" alt="">
                 <td class="px-6 py-4">
-                    Silver
+                   '.$name.'  
+                </td>
+               <td class="px-6 py-4">
+                   <img class ="rounded-xl" src="'.$photoplayer.'" alt="player">  
                 </td>
                 <td class="px-6 py-4">
-                    Laptop
+                   '.$position_player.'  
+                </td>
+                 <td class="px-6 py-4">
+                   '.$nom_nationalite.'  
                 </td>
                 <td class="px-6 py-4">
-                    $2999
+                   <img class ="rounded-xl" src="'.$flag_nationalite.'" alt="player">  
                 </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Microsoft Surface Pro
-                </th>
+                 <td class="px-6 py-4">
+                   '.$club_name.'  
+                </td>
+                 <td class="px-6 py-4">
+                   <img class ="rounded-xl" src="'.$club_logo.'" alt="player">  
+                </td>
+                 <td class="px-6 py-4">
+                   '.$Rating.'  
+                </td>
+                 <td class="px-6 py-4">
+                   '.$pace.'  
+                </td>
+                 <td class="px-6 py-4">
+                   '.$shooting.'  
+                </td>
+                 <td class="px-6 py-4">
+                   '.$passing.'  
+                </td>
+                 <td class="px-6 py-4">
+                   '.$defending.'  
+                </td>
+                 <td class="px-6 py-4">
+                   '.$dribbling.'
+                </td>
                 <td class="px-6 py-4">
-                    White
+                   '.$physical.'
                 </td>
                 <td class="px-6 py-4">
-                    Laptop PC
+                   <a  id ="button_delete" name ="delete" class ="confirm_click focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" href ="delete.php?delete_id='.$player.'" >Delete</a>
                 </td>
-                <td class="px-6 py-4">
-                    $1999
-                </td>
-            </tr>
-            <tr class="bg-white dark:bg-gray-800">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Magic Mouse 2
-                </th>
-                <td class="px-6 py-4">
-                    Black
-                </td>
-                <td class="px-6 py-4">
-                    Accessories
-                </td>
-                <td class="px-6 py-4">
-                    $99
-                </td>
-            </tr>
+
+                </tr>
         </tbody>
+                ';
+            }
+
+
+            // function of delete
+
+            if(isset($_GET['delete']))
+            {
+                echo "hello im here";
+            }
+?>
+ 
     </table>
 </div>
 
@@ -241,14 +284,19 @@
 
 </section>
 
-
+<td class="px-6 py-4">
+                   <img src="" alt="">  
+                </td>
 
 
 </div>
 <script>
+    const button_delete = document.querySelector(".button_delete");
+console.log(button_delete);
 const closemodal = document.querySelector("#boutton-close");
 const modal_joueur = document.querySelector(".modal-add");
 const add_player = document.querySelector("#add-player");
+
 if(modal_joueur && closemodal && add_player )
 {
 // console.log("its available")
@@ -269,6 +317,6 @@ add_player.addEventListener("click",function(){
 </script>
 
 </body>
-
+<script src ="js/joueur.js"></script>
 
 </html>

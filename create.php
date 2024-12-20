@@ -2,8 +2,13 @@
 
 include("configuration.php");
 
+
+
+
+
 if(isset($_POST["send"]))
 {
+    
     $name = $_POST["fname"] ;
     $photourl = $_POST["photourl"];
     $position = $_POST["position"];
@@ -20,18 +25,16 @@ if(isset($_POST["send"]))
     $physical = $_POST["physical"];
 
 
-$error_message;  // error message to display it
-
- if(empty($name) && empty($photourl) && empty($position) && empty($nationality) && empty($flag) && empty($club) &&
-  empty($logo) && empty($rating) && empty($pace) && empty($shooting) && empty($passing) && empty($dribbling) && empty($defending) && empty($physical)  )
+ if(empty($name) || empty($photourl) || empty($position) || empty($nationality) || empty($flag) || empty($club) ||
+  empty($logo) || empty($rating) || empty($pace) || empty($shooting) || empty($passing) || empty($dribbling) || empty($defending)  || empty($physical))
  {
-    echo "not enter";
 
+   $error = "please enter informations";
  }
 
  else
  {
-    $querie_joueur = mysqli_query($conn,"INSERT INTO  player(nameplayer,Rating,positionplayer) VALUES('$name','$rating','$position');");
+    $querie_joueur = mysqli_query($conn,"INSERT INTO  player(nameplayer,Photoplayer,Rating,positionplayer) VALUES('$name','$photourl','$rating','$position');");
     $querie_equipe = mysqli_query($conn,"INSERT INTO equipe(logo,nom) VALUES('$logo','$club');");
     $query_nationnalite = mysqli_query($conn,"INSERT INTO nationnalite(nom,flag) VALUES('$nationality','$flag');");
     $playerdetails = mysqli_query($conn,"INSERT INTO playerdetails(pace,shooting,passing,defending,dribbling,physical) VALUES('$pace','$shooting','$passing','$dribbling','$defending','$physical');");
@@ -49,9 +52,8 @@ $error_message;  // error message to display it
     header("Location: joueur.php");
 
  }
+
 }
-
-
 
 
 
